@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Приватный чат</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #111; /* Темный фон */
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+        .container {
+            padding: 20px;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 16px;
+            color: #aaa;
+            margin-bottom: 30px;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #0088cc; /* Цвет кнопки Телеграма */
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 15px 40px;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0, 136, 204, 0.4);
+            transition: 0.3s;
+        }
+        .btn:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Вам пришло 1 сообщение 💌</h1>
+        <p>Нажмите кнопку ниже, чтобы открыть чат</p>
+        
+        <a href="tg://resolve?domain=СЮДА_ВСТАВЬ_ЮЗЕРНЕЙМ_БОТА" class="btn">Открыть в Telegram</a>
+    </div>
+</body>
+</html>
