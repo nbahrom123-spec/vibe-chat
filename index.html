@@ -2,122 +2,144 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Новое сообщение!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Новое уведомление</title>
     <style>
+        :root {
+            --accent-color: #0088cc;
+            --bg-gradient: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+        }
+
         body {
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            color: #fff;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg-gradient);
+            height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: white;
             overflow: hidden;
         }
-        .card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
+
+        /* Эффект матового стекла для карточки */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            padding: 40px 30px;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-            max-width: 320px;
+            border-radius: 32px;
+            padding: 40px 24px;
             width: 85%;
+            max-width: 340px;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.8s ease-out;
         }
-        .avatar-container {
+
+        .avatar-wrapper {
             position: relative;
-            width: 100px; /* Сделали фото чуть больше */
-            height: 100px;
-            margin: 0 auto 20px;
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 24px;
         }
-        .avatar-img {
+
+        /* Контейнер для фото с неоновым свечением */
+        .profile-pic {
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            object-fit: cover; /* Идеально вписывает фото в круг */
-            box-shadow: 0 0 25px rgba(255, 71, 87, 0.4);
-            border: 3px solid #2a2a4a;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 136, 204, 0.3);
         }
-        .badge {
+
+        /* Пульсирующий индикатор сообщения */
+        .online-badge {
             position: absolute;
-            top: 0;
-            right: -5px;
-            background-color: #ff4757;
+            top: 2px;
+            right: 2px;
+            background: #ff4757;
             color: white;
-            border-radius: 50%;
             width: 28px;
             height: 28px;
+            border-radius: 50%;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
+            font-size: 14px;
             font-weight: bold;
-            font-size: 14px;
             border: 3px solid #1a1a2e;
-            animation: pulse-badge 2s infinite;
+            animation: ring 2s infinite;
         }
-        h2 {
-            margin: 0 0 10px;
-            font-size: 22px;
-            font-weight: 600;
+
+        h1 {
+            font-size: 24px;
+            margin: 0 0 12px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
         }
+
         p {
-            color: #a4b0be;
-            font-size: 14px;
-            margin-bottom: 30px;
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.7);
             line-height: 1.5;
+            margin-bottom: 32px;
         }
-        .btn {
+
+        /* Кнопка с эффектом глубины */
+        .tg-button {
             display: block;
-            background: linear-gradient(90deg, #0097e6, #00a8ff);
+            background: linear-gradient(90deg, #0088cc, #00a8ff);
             color: white;
             text-decoration: none;
+            padding: 18px;
+            border-radius: 20px;
             font-size: 17px;
             font-weight: 600;
-            padding: 16px 20px;
-            border-radius: 30px;
-            box-shadow: 0 8px 25px rgba(0, 168, 255, 0.5);
+            box-shadow: 0 10px 20px rgba(0, 136, 204, 0.4);
             transition: all 0.3s ease;
-            animation: pulse-btn 2.5s infinite;
+            animation: buttonPulse 2s infinite;
         }
-        .btn:active {
+
+        .tg-button:active {
             transform: scale(0.96);
+            filter: brightness(1.1);
         }
-        .cancel-link {
-            display: inline-block;
-            margin-top: 20px;
-            color: #57606f;
-            text-decoration: none;
-            font-size: 13px;
+
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        @keyframes pulse-badge {
+
+        @keyframes ring {
+            0% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.7); }
+            70% { box-shadow: 0 0 0 12px rgba(255, 71, 87, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0); }
+        }
+
+        @keyframes buttonPulse {
             0% { transform: scale(1); }
-            50% { transform: scale(1.15); box-shadow: 0 0 10px rgba(255, 71, 87, 0.6); }
+            50% { transform: scale(1.02); }
             100% { transform: scale(1); }
-        }
-        @keyframes pulse-btn {
-            0% { box-shadow: 0 8px 20px rgba(0, 168, 255, 0.4); }
-            50% { box-shadow: 0 8px 35px rgba(0, 168, 255, 0.7); transform: translateY(-2px); }
-            100% { box-shadow: 0 8px 20px rgba(0, 168, 255, 0.4); transform: translateY(0); }
         }
     </style>
 </head>
 <body>
-    <div class="card">
-        <div class="avatar-container">
-            <img src="photo.jpg" alt="Photo" class="avatar-img">
-            <div class="badge">1</div>
+
+    <div class="glass-card">
+        <div class="avatar-wrapper">
+            <img src="photo.jpg" alt="Profile" class="profile-pic">
+            <div class="online-badge">1</div>
         </div>
-        <h2>Вам пришло фото</h2>
-        <p>Сообщение доступно только в защищенном чате. Откройте, чтобы посмотреть.</p>
         
-        <a href="tg://resolve?domain=СЮДА_ВСТАВЬ_ЮЗЕРНЕЙМ_БОТА" class="btn">Смотреть в Telegram 👀</a>
-        
-        <a href="#" class="cancel-link">Остановить 💔</a>
+        <h1>Вам пришло фото</h1>
+        <p>Настя отправила вам личное сообщение. Откройте Telegram, чтобы посмотреть.</p>
+
+        <a href="tg://resolve?domain=tvoyanastiutytbot" class="tg-button">Смотреть в Telegram 👀</a>
     </div>
+
 </body>
 </html>
